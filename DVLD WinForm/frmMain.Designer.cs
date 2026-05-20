@@ -1,0 +1,126 @@
+﻿namespace DVLD_WinForm
+{
+    partial class frmMain
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.applicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.peopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.picForm = new System.Windows.Forms.PictureBox();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picForm)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(10, 10);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applicationsToolStripMenuItem,
+            this.peopleToolStripMenuItem,
+            this.usersToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1336, 72);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            // 
+            // applicationsToolStripMenuItem
+            // 
+            this.applicationsToolStripMenuItem.Image = global::DVLD_WinForm.Properties.Resources.Applications_64;
+            this.applicationsToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.applicationsToolStripMenuItem.Name = "applicationsToolStripMenuItem";
+            this.applicationsToolStripMenuItem.Size = new System.Drawing.Size(204, 68);
+            this.applicationsToolStripMenuItem.Text = "Applications ";
+            // 
+            // peopleToolStripMenuItem
+            // 
+            this.peopleToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.peopleToolStripMenuItem.Image = global::DVLD_WinForm.Properties.Resources.People_64;
+            this.peopleToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.peopleToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
+            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(164, 68);
+            this.peopleToolStripMenuItem.Text = "People";
+            this.peopleToolStripMenuItem.Click += new System.EventHandler(this.peopleToolStripMenuItem_Click);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.usersToolStripMenuItem.Image = global::DVLD_WinForm.Properties.Resources.Users_2_641;
+            this.usersToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.usersToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(149, 68);
+            this.usersToolStripMenuItem.Text = "Users";
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+            // 
+            // picForm
+            // 
+            this.picForm.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.picForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picForm.Image = global::DVLD_WinForm.Properties.Resources.Logo_Final;
+            this.picForm.Location = new System.Drawing.Point(0, 72);
+            this.picForm.Name = "picForm";
+            this.picForm.Size = new System.Drawing.Size(1336, 490);
+            this.picForm.TabIndex = 1;
+            this.picForm.TabStop = false;
+            // 
+            // frmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1336, 562);
+            this.Controls.Add(this.picForm);
+            this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picForm)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem applicationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem peopleToolStripMenuItem;
+        private System.Windows.Forms.PictureBox picForm;
+        private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
+    }
+}
+

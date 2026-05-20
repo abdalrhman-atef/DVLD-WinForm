@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DVLD WinForm/DVLD WinForm.csproj" Id="fd6cf6da-6714-4dca-89dc-ef29b0e202c6" />
+  <Project Path="DVLD_BusinessLayer/DVLD_BusinessLayer.csproj" Id="91ba6bf2-fb9d-4f69-8850-13a5b417027d" />
+  <Project Path="DVLD_DataAccessLayer/DVLD DataAccessLayer.csproj" Id="4a7c0d8c-6bcc-4663-a385-e16b1072381e" />
+</Solution>
