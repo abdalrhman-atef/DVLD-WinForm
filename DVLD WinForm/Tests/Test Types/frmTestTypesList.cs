@@ -14,7 +14,8 @@ namespace DVLD_WinForm.Tests
 {
     public partial class frmTestTypesList : Form
     {
-      
+        DataTable _AllTestTypes; 
+
         public frmTestTypesList()
         {
             InitializeComponent();
@@ -22,7 +23,8 @@ namespace DVLD_WinForm.Tests
         
         private void _Reset() 
         {
-            DataTable _AllTestTypes = clsTestTypes.TestTypesList();
+            _AllTestTypes = clsTestTypes.TestTypesList();
+
             dgvTestTypes.DataSource = _AllTestTypes;
            
             lblRecordsValue.Text = dgvTestTypes.Rows.Count.ToString();
@@ -57,7 +59,7 @@ namespace DVLD_WinForm.Tests
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmUpdateTestTypes frm = new frmUpdateTestTypes((int)dgvTestTypes.CurrentRow.Cells[0].Value);
+            frmUpdateTestTypes frm = new frmUpdateTestTypes((clsTestTypes.enTestType)dgvTestTypes.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
             _Reset();
         }
