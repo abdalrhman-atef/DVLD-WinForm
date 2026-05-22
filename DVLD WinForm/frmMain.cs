@@ -1,5 +1,7 @@
-﻿using DVLD_WinForm.Global_classes;
+﻿using DVLD_WinForm.Applications;
+using DVLD_WinForm.Global_classes;
 using DVLD_WinForm.People;
+using DVLD_WinForm.Tests;
 using DVLD_WinForm.Users;
 using System;
 using System.Collections.Generic;
@@ -70,6 +72,21 @@ namespace DVLD_WinForm
 
         }
 
-        
+        private void picForm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListApplicationTypes frm = new frmListApplicationTypes();
+            frm.ShowDialog();
+        }
+
+        private void ManageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestTypesList frm = new frmTestTypesList();
+            frm.ShowDialog();
+        }
     }
 }
