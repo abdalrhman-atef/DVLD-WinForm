@@ -15,7 +15,7 @@ namespace DVLD_DataAccessLayer
         {
             DataTable dt=new DataTable();
             SqlConnection connection= new SqlConnection(clsDVLD_DataAccessSettings.ConnectionString);
-            string Query = "select * from ApplicationTypes";
+            string Query = "select * from ApplicationTypes order by ApplicationTypeID ";
             SqlCommand cmd = new SqlCommand(Query, connection);
 
             try
