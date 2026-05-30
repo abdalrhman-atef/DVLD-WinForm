@@ -81,7 +81,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection connection = new SqlConnection(clsDVLD_DataAccessSettings.ConnectionString);
            
             string Query = "INSERT INTO [dbo].[Applications] ([ApplicantPersonID] ,[ApplicationDate] ,[ApplicationTypeID] ,[ApplicationStatus],[LastStatusDate],[PaidFees] ,[CreatedByUserID])" +
-                " VALUES (@ApplicantPersonID,@ApplicationDate, @ApplicationTypeID,@ApplicationStatus,@LastStatusDate,@PaidFees ,@CreatedByUserID" +
+                " VALUES (@ApplicantPersonID,@ApplicationDate, @ApplicationTypeID,@ApplicationStatus,@LastStatusDate,@PaidFees ,@CreatedByUserID)" +
                 " SELECT SCOPE_IDENTITY();";
             SqlCommand cmd = new SqlCommand(Query, connection);
             cmd.Parameters.AddWithValue("@ApplicantPersonID", ApplicantPersonID);
@@ -130,14 +130,14 @@ namespace DVLD_DataAccessLayer
                     ApplicationTypeID = (int)reader["ApplicationTypeID"];
                     ApplicationStatus = (byte)reader["ApplicationStatus"];
                     LastStatusDate = (DateTime)reader["LastStatusDate"];
-                    PaidFees = (float)reader["PaidFees"];
+                    PaidFees = Convert.ToSingle( reader["PaidFees"]);
                     CreatedByUserID = (int)reader["CreatedByUserID"];
 
                     IsFound = true;
 
                 }
             }
-            catch { IsFound = false; }
+            catch { }
             finally { connection.Close(); }
             return IsFound;
 
@@ -202,7 +202,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("Error: " + ex.Message);
+               
                 isFound = false;
             }
             finally
@@ -212,14 +212,6 @@ namespace DVLD_DataAccessLayer
 
             return isFound;
         }
-
-        public static bool DoesPersonHaveActiveApplication(int PersonID, int ApplicationTypeID)
-        {
-
-           
-            return (GetActiveApplicationID(PersonID, ApplicationTypeID) != -1);
-        }
-
         public static int GetActiveApplicationID(int PersonID, int ApplicationTypeID)
         {
             int ActiveApplicationID = -1;
@@ -246,7 +238,7 @@ namespace DVLD_DataAccessLayer
             }
             catch (Exception ex)
             {
-               
+
                 return ActiveApplicationID;
             }
             finally
@@ -257,6 +249,12 @@ namespace DVLD_DataAccessLayer
             return ActiveApplicationID;
         }
 
+        public static bool DoesPersonHaveActiveApplication(int PersonID, int ApplicationTypeID)
+        {
+
+           
+            return (GetActiveApplicationID(PersonID, ApplicationTypeID) != -1);
+        }
 
         public static int GetActiveApplicationIDForLicenseClass(int PersonID, int ApplicationTypeID, int LicenseClassID)
         {
@@ -302,6 +300,7 @@ namespace DVLD_DataAccessLayer
             return ActiveApplicationID;
         }
 
+        
         public static bool UpdateStatus(int ApplicationID, short NewStatus)
         {
 
@@ -318,7 +317,7 @@ namespace DVLD_DataAccessLayer
 
             command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
             command.Parameters.AddWithValue("@NewStatus", NewStatus);
-            command.Parameters.AddWithValue("LastStatusDate", DateTime.Now);
+            command.Parameters.AddWithValue("@LastStatusDate", DateTime.Now);
 
 
             try

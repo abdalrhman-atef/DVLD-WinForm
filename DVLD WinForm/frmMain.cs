@@ -1,5 +1,7 @@
 ﻿using DVLD_WinForm.Applications;
+using DVLD_WinForm.Applications.LocalDrivingLicenseApplication;
 using DVLD_WinForm.Global_classes;
+using DVLD_WinForm.LocalDrivingLicenseApplication;
 using DVLD_WinForm.People;
 using DVLD_WinForm.Tests;
 using DVLD_WinForm.Users;
@@ -86,6 +88,18 @@ namespace DVLD_WinForm
         private void ManageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTestTypesList frm = new frmTestTypesList();
+            frm.ShowDialog();
+        }
+
+        private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddUpdateLocalLicense frm = new frmAddUpdateLocalLicense();
+            frm.ShowDialog();
+        }
+
+        private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListLocalDrivingLicenseApplications frm = new frmListLocalDrivingLicenseApplications();
             frm.ShowDialog();
         }
     }
