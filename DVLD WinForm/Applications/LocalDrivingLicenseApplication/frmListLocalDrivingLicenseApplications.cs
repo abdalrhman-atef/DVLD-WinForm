@@ -1,5 +1,6 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_WinForm.LocalDrivingLicenseApplication;
+using DVLD_WinForm.Tests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -197,5 +198,29 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
             }
         }
 
+        private void visionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+            frmListTestAppointments frm = new frmListTestAppointments((int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value, clsTestTypes.enTestType.VisionTest);
+            frm.ShowDialog();
+            _RefreshApplicationsList();
+        }
+
+        private void writenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            frmListTestAppointments frm = new frmListTestAppointments(LocalDrivingLicenseApplicationID, clsTestTypes.enTestType.WrittenTest);
+            frm.ShowDialog();
+            _RefreshApplicationsList();
+
+        }
+
+        private void streetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            frmListTestAppointments frm = new frmListTestAppointments(LocalDrivingLicenseApplicationID, clsTestTypes.enTestType.StreetTest);
+            frm.ShowDialog();
+            _RefreshApplicationsList();
+        }
     }
 }

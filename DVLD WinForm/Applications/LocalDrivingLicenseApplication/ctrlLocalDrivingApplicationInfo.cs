@@ -23,16 +23,7 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
         {
             InitializeComponent();
         }
-        private void _FillLocalDrivingLicenseApplicationInfo()
-        {
-           
-
-            lblDrivingLicenseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
-            lblLicenseType.Text = clsLicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName;
-            ctrlBaseApplicationInfo1._LoadApplicationInfo(_LocalDrivingLicenseApplication._ApplicationID);
-
-        }
-
+        
         private void _ResetLocalDrivingLicenseApplicationInfo()
         {
             _LocalDrivingLicenseApplicationID = -1;
@@ -55,11 +46,24 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
                 MessageBox.Show("No Application with ApplicationID = " + LocalDrivingLicenseApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            else
+            {
+                _FillLocalDrivingLicenseApplicationInfo();
 
-            _FillLocalDrivingLicenseApplicationInfo();
+            }
 
 
         }
+        private void _FillLocalDrivingLicenseApplicationInfo()
+        {
+
+
+            lblDrivingLicenseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+            lblLicenseType.Text = clsLicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName;
+            ctrlBaseApplicationInfo1._LoadApplicationInfo(_LocalDrivingLicenseApplication._ApplicationID);
+
+        }
+
         public void _LoadInfoByApplicationID(int ApplicationID)
         {
             
