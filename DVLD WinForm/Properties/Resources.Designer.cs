@@ -693,6 +693,16 @@ namespace DVLD_WinForm.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LocalDriving_License1 {
+            get {
+                object obj = ResourceManager.GetObject("LocalDriving License1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Logo_Final {
             get {
                 object obj = ResourceManager.GetObject("Logo Final", resourceCulture);
@@ -886,6 +896,16 @@ namespace DVLD_WinForm.Properties {
         internal static System.Drawing.Bitmap Number_322 {
             get {
                 object obj = ResourceManager.GetObject("Number 322", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Number_323 {
+            get {
+                object obj = ResourceManager.GetObject("Number 323", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
