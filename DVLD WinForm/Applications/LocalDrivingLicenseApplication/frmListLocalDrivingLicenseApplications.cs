@@ -222,5 +222,35 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
             frm.ShowDialog();
             _RefreshApplicationsList();
         }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
+            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
+
+            bool PassVisionTest= LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.VisionTest);
+            bool PassWrittenTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.WrittenTest);
+            bool PassStreetTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.StreetTest);
+
+
+            // scheduleToolStripMenuItem.Enabled = ((LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New)&& !(LocalDrivingLicenseApplication.GetPassedTestCount()==3));
+
+            // To Enable Schedule Test Menu: Application Status Must Be New Not Canceled Or Completed.
+            // And Person Must Not Passed All Of Tests.
+            // Another That We Disable Schedule Test Menu.
+
+            scheduleToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New) && (!PassVisionTest || !PassWrittenTest||!PassStreetTest);
+
+           
+                //To Allow Schedule vision test, Person must not passed the same test before.
+                visionTestToolStripMenuItem.Enabled = !PassVisionTest;
+                //To Allow Schedule written test, Person must pass the vision test and must not passed the same test before.
+                writenTestToolStripMenuItem.Enabled = PassVisionTest && !PassWrittenTest;
+                //To Allow Schedule street test, Person must pass the vision And written tests, and must not passed the same test before.
+                streetTestToolStripMenuItem.Enabled = PassVisionTest && PassWrittenTest && !PassStreetTest;
+
+            
+        }
+
     }
 }

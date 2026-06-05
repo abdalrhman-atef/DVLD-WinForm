@@ -185,7 +185,17 @@ namespace DVLD_DataAccessLayer
             command.Parameters.AddWithValue("@TestID", TestID);
             command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
             command.Parameters.AddWithValue("@TestResult", TestResult);
-            command.Parameters.AddWithValue("@Notes", Notes);
+            if (Notes!=""&& Notes!=null)
+            {
+                command.Parameters.AddWithValue("@Notes", Notes);
+
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@Notes", DBNull.Value);
+
+            }
+
             command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
 
             try

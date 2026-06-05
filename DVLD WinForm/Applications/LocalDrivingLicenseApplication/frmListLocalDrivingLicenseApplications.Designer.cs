@@ -36,7 +36,7 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancleApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.schedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visionTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writenTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.streetTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,9 +90,10 @@
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem,
             this.cancleApplicationToolStripMenuItem,
-            this.schedToolStripMenuItem});
+            this.scheduleToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(285, 194);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(285, 222);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // showApplicationDetailesToolStripMenuItem
             // 
@@ -130,17 +131,17 @@
             this.cancleApplicationToolStripMenuItem.Text = "Cancle Application";
             this.cancleApplicationToolStripMenuItem.Click += new System.EventHandler(this.cancleApplicationToolStripMenuItem_Click);
             // 
-            // schedToolStripMenuItem
+            // scheduleToolStripMenuItem
             // 
-            this.schedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scheduleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.visionTestToolStripMenuItem,
             this.writenTestToolStripMenuItem,
             this.streetTestToolStripMenuItem});
-            this.schedToolStripMenuItem.Image = global::DVLD_WinForm.Properties.Resources.Schedule_Test_32;
-            this.schedToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.schedToolStripMenuItem.Name = "schedToolStripMenuItem";
-            this.schedToolStripMenuItem.Size = new System.Drawing.Size(284, 38);
-            this.schedToolStripMenuItem.Text = "ScheduleTest";
+            this.scheduleToolStripMenuItem.Image = global::DVLD_WinForm.Properties.Resources.Schedule_Test_32;
+            this.scheduleToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.scheduleToolStripMenuItem.Name = "scheduleToolStripMenuItem";
+            this.scheduleToolStripMenuItem.Size = new System.Drawing.Size(284, 38);
+            this.scheduleToolStripMenuItem.Text = "ScheduleTest";
             // 
             // visionTestToolStripMenuItem
             // 
@@ -319,7 +320,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancleApplicationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem schedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scheduleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visionTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writenTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem streetTestToolStripMenuItem;
