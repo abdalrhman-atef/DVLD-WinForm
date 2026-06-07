@@ -1,5 +1,6 @@
 ﻿using DVLD_BusinessLayer;
 using DVLD_WinForm.Licenses;
+using DVLD_WinForm.Licenses.Local_Licens;
 using DVLD_WinForm.LocalDrivingLicenseApplication;
 using DVLD_WinForm.Tests;
 using System;
@@ -132,6 +133,7 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
         }
         private void btnAddLocalDrivingApplication_Click(object sender, EventArgs e)
         {
+
             frmAddUpdateLocalLicense frm = new frmAddUpdateLocalLicense();
             frm.ShowDialog();
             _RefreshApplicationsList();
@@ -238,18 +240,16 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
 
             bool IsLicenseExist = LocalDrivingLicenseApplication.IsLicenseIssued();
 
-            issueDriverLicenseFirstTimeToolStripMenuItem.Enabled = !IsLicenseExist && (PassVisionTest&&PassWrittenTest&&PassStreetTest);
-            showLicenseToolStripMenuItem.Enabled = IsLicenseExist;
-
+            issueDriverLicenseFirstTimeToolStripMenuItem.Enabled = !IsLicenseExist && (PassVisionTest&&PassWrittenTest&&PassStreetTest)&& (LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New);
+            showLicenseToolStripMenuItem.Enabled = IsLicenseExist&& (LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.Completed);
             // You Can Not Cancel Application If It Completed Or Canceled.
             cancelApplicationToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication._AppStatus==clsApplications.enStatus.New);
             // You Can Not Delete  Application If License was Issued.
-            deleteToolStripMenuItem.Enabled = !IsLicenseExist;
+            deleteToolStripMenuItem.Enabled = !IsLicenseExist|| !(LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.Completed);
          
             editToolStripMenuItem.Enabled = !IsLicenseExist&& (LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New);
 
-            // scheduleToolStripMenuItem.Enabled = ((LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New)&& !(LocalDrivingLicenseApplication.GetPassedTestCount()==3));
-
+           
             // To Enable Schedule Test Menu: Application Status Must Be New Not Canceled Or Completed.
             // And Person Must Not Passed All Of Tests.
             // Another That We Disable Schedule Test Menu.
@@ -273,6 +273,27 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
             frmIssueLicenseForTheFirstTime frm = new frmIssueLicenseForTheFirstTime((int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
             _RefreshApplicationsList();
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID((int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+            int LicenseID= localDrivingLicenseApplication.GetActiveLicenseID();
+
+           
+            if (LicenseID != -1)
+            {
+                frmShowLicenseInfo frm = new frmShowLicenseInfo(LicenseID);
+                frm.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _RefreshApplicationsList();
+
         }
     }
 }

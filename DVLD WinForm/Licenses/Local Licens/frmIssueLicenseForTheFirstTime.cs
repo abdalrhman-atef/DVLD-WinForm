@@ -16,7 +16,7 @@ namespace DVLD_WinForm.Licenses
     {
         int _LocalDrivingLicenseApplicationID = -1;
         clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
-        clsLicenses license;
+       
         public frmIssueLicenseForTheFirstTime(int LocalDrivingLicenseApplicationID)
         {
             InitializeComponent();

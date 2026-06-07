@@ -148,6 +148,12 @@ namespace DVLD_WinForm.LocalDrivingLicenseApplication
                 return;
             }
 
+            if (clsLicenses.IsPersonHaveActiveLicense(ctrlPersonCardWithFilter1.PersonID, LicenseClassID)) 
+            {
+                MessageBox.Show("Person already have a license with the same applied driving class, Choose diffrent driving class", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             _LocalDrivingApplication._ApplicantPersonID = ctrlPersonCardWithFilter1.PersonID;
             _LocalDrivingApplication._AppDate= DateTime.Now;
             _LocalDrivingApplication._AppTypeID =(int) clsApplications.enApplicationType.NewDrivingLicense;
