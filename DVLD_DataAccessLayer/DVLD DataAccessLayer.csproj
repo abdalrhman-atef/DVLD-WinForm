@@ -47,6 +47,7 @@
     <Compile Include="clsDriversData.cs" />
     <Compile Include="clsDVLD_DataAccessSettings.cs" />
     <Compile Include="clsLicenseClassesData.cs" />
+    <Compile Include="clsLicensesData.cs" />
     <Compile Include="clsLocalDrivingLicenseApplicationData.cs" />
     <Compile Include="clsPeopleData.cs" />
     <Compile Include="clsTestAppointmentsData.cs" />
