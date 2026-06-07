@@ -1,4 +1,5 @@
 ﻿using DVLD_BusinessLayer;
+using DVLD_WinForm.Licenses;
 using DVLD_WinForm.LocalDrivingLicenseApplication;
 using DVLD_WinForm.Tests;
 using System;
@@ -228,10 +229,24 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
             int LocalDrivingLicenseApplicationID = (int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value;
             clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
 
-            bool PassVisionTest= LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.VisionTest);
+           
+
+
+            bool PassVisionTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.VisionTest);
             bool PassWrittenTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.WrittenTest);
             bool PassStreetTest = LocalDrivingLicenseApplication.DoesPassTestType(clsTestTypes.enTestType.StreetTest);
 
+            bool IsLicenseExist = LocalDrivingLicenseApplication.IsLicenseIssued();
+
+            issueDriverLicenseFirstTimeToolStripMenuItem.Enabled = !IsLicenseExist && (PassVisionTest&&PassWrittenTest&&PassStreetTest);
+            showLicenseToolStripMenuItem.Enabled = IsLicenseExist;
+
+            // You Can Not Cancel Application If It Completed Or Canceled.
+            cancelApplicationToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication._AppStatus==clsApplications.enStatus.New);
+            // You Can Not Delete  Application If License was Issued.
+            deleteToolStripMenuItem.Enabled = !IsLicenseExist;
+         
+            editToolStripMenuItem.Enabled = !IsLicenseExist&& (LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New);
 
             // scheduleToolStripMenuItem.Enabled = ((LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New)&& !(LocalDrivingLicenseApplication.GetPassedTestCount()==3));
 
@@ -239,7 +254,7 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
             // And Person Must Not Passed All Of Tests.
             // Another That We Disable Schedule Test Menu.
 
-            scheduleToolStripMenuItem.Enabled = (LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New) && (!PassVisionTest || !PassWrittenTest||!PassStreetTest);
+            scheduleToolStripMenuItem.Enabled = !IsLicenseExist &&(LocalDrivingLicenseApplication._AppStatus == clsApplications.enStatus.New) && (!PassVisionTest || !PassWrittenTest||!PassStreetTest);
 
            
                 //To Allow Schedule vision test, Person must not passed the same test before.
@@ -249,8 +264,15 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
                 //To Allow Schedule street test, Person must pass the vision And written tests, and must not passed the same test before.
                 streetTestToolStripMenuItem.Enabled = PassVisionTest && PassWrittenTest && !PassStreetTest;
 
+
             
         }
 
+        private void issueDriverLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueLicenseForTheFirstTime frm = new frmIssueLicenseForTheFirstTime((int)dgvLocalDrivingLicenseApplications.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshApplicationsList();
+        }
     }
 }

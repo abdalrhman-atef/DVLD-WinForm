@@ -61,7 +61,7 @@ namespace DVLD_WinForm.Applications.LocalDrivingLicenseApplication
             lblDrivingLicenseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
             lblLicenseType.Text = clsLicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName;
             ctrlBaseApplicationInfo1._LoadApplicationInfo(_LocalDrivingLicenseApplication._ApplicationID);
-
+            lblPassedTests.Text = _LocalDrivingLicenseApplication.GetPassedTestCount().ToString() + "/3";
         }
 
         public void _LoadInfoByApplicationID(int ApplicationID)
