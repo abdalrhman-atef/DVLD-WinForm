@@ -152,7 +152,7 @@ namespace DVLD_BusinessLayer
         {
             return clsLicensesData.GetDriverLicenses(DriverID);
         }
-        
+      
         public static clsLicenses Find (int LicenseID) 
         {
             int ApplicationID = -1;
@@ -193,6 +193,12 @@ namespace DVLD_BusinessLayer
         public bool IsLicenseExpired() 
         {
             return (this.ExpirationDate < DateTime.Now);
+        
+        }
+        public bool DeactivateCurrentLicense(int LicenseID) 
+        {
+        return clsLicensesData.DeactivateLicense(LicenseID);
+        
         
         }
 

@@ -1,6 +1,7 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -274,6 +275,79 @@ namespace DVLD_BusinessLayer
             return clsTest.ISPassedAllTests(LocalDrivingLicenseApplicationID);
         }
 
+        public int IssueLicenseForFirstTime(string Notes,int CreatedByUserID) 
+        {
+            int DriverID = -1;
+            clsDriver Driver = clsDriver.FindByPersonID(this._ApplicantPersonID);
+            // we check if the driver already there for this person.
+            if (Driver!=null)
+            {
+                DriverID = Driver.DriverID;
+
+            }
+            else
+            {
+                // else We Make This Person A driver Before Issue A License .
+                Driver = new clsDriver();
+                Driver.CreatedDate= DateTime.Now;
+                Driver.CreatedByUserID= CreatedByUserID;
+                Driver.PersonID = this._ApplicantPersonID;
+                if (Driver.Save())
+                {
+                    DriverID = Driver.DriverID;
+                }
+                else
+                {
+                   return  -1;
+                }
+            }
+            
+            bool IsPersonHaveLicense = clsLicenses.IsPersonHaveActiveLicense(this._ApplicantPersonID, this.LicenseClassID);
+
+            if (IsPersonHaveLicense)
+            {
+                return -1;
+                
+            }
+
+            else
+            {
+                clsLicenses License = new clsLicenses();
+                License.ApplicationID = this._ApplicationID;
+                License.DriverID = DriverID;
+                License.LicenseClassID = this.LicenseClassID;
+                License.IssueDate = DateTime.Now;
+                License.ExpirationDate = DateTime.Now.AddYears(this.LicenseClassInfo.DefaultValidityLength);
+                License.Notes = Notes;
+                License.PaidFees = this.LicenseClassInfo.ClassFees;
+                License.IsActive = true;
+                License.IssueReason = clsLicenses.enIssueReason.FirstTime;
+                License.CreatedByUserID = CreatedByUserID;
+                if (License.Save())
+                {
+                    this.SetComplete();
+                    return License.LicenseID;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+
+
+        }
+        public int GetActiveLicenseID() 
+        {
+            return clsLicenses.GetActiveLicenseIDByPersonID(this._ApplicantPersonID, this.LicenseClassID);
+        
+        }
+        public bool IsLicenseIssued() 
+        {
+
+            return( GetActiveLicenseID() != -1);
+
+
+        }
 
     }
 }
