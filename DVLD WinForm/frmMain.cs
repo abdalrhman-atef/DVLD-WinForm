@@ -1,5 +1,6 @@
 ﻿using DVLD_WinForm.Applications;
 using DVLD_WinForm.Applications.LocalDrivingLicenseApplication;
+using DVLD_WinForm.Drivers;
 using DVLD_WinForm.Global_classes;
 using DVLD_WinForm.LocalDrivingLicenseApplication;
 using DVLD_WinForm.People;
@@ -106,6 +107,13 @@ namespace DVLD_WinForm
         private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmListLocalDrivingLicenseApplications frm = new frmListLocalDrivingLicenseApplications();
+            frm.ShowDialog();
+
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDrivers frm = new frmListDrivers();
             frm.ShowDialog();
 
         }
