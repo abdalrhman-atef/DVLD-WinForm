@@ -293,13 +293,14 @@ namespace DVLD_DataAccessLayer
         public static int GetActiveInternationalLicenseIDByDriverID(int DriverID)
         {
             int InternationalLicenseID = -1;
-
+                
             SqlConnection connection = new SqlConnection(clsDVLD_DataAccessSettings.ConnectionString);
 
             string query = @"  
                             SELECT Top 1 InternationalLicenseID
                             FROM InternationalLicenses 
                             where DriverID=@DriverID and GetDate() between IssueDate and ExpirationDate 
+                            AND IsActive = 1 
                             order by ExpirationDate Desc;";
 
             SqlCommand command = new SqlCommand(query, connection);
