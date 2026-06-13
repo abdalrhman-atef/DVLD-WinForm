@@ -1,7 +1,11 @@
 ﻿using DVLD_WinForm.Applications;
+using DVLD_WinForm.Applications.International_License_Application;
 using DVLD_WinForm.Applications.LocalDrivingLicenseApplication;
+using DVLD_WinForm.Applications.ReNew_License_Application;
+using DVLD_WinForm.Applications.Replace_Lost_Or_Damage_License;
 using DVLD_WinForm.Drivers;
 using DVLD_WinForm.Global_classes;
+using DVLD_WinForm.Licenses.Intrnational_Licenses;
 using DVLD_WinForm.LocalDrivingLicenseApplication;
 using DVLD_WinForm.People;
 using DVLD_WinForm.Tests;
@@ -116,6 +120,36 @@ namespace DVLD_WinForm
             frmListDrivers frm = new frmListDrivers();
             frm.ShowDialog();
 
+        }
+
+        private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewInternationalLicenseApplication frm = new frmNewInternationalLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void internationalDrivingLicenseApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListInternationalLicenses frm = new frmListInternationalLicenses();
+            frm.ShowDialog();
+        }
+
+        private void renewLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLicenseApplication frm = new frmRenewLicenseApplication();
+            frm.ShowDialog();
+        }
+
+        private void replacementLostLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceLostOrDamageLicense frm= new frmReplaceLostOrDamageLicense();
+            frm.ShowDialog();
+        }
+
+        private void replacementDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceLostOrDamageLicense frm = new frmReplaceLostOrDamageLicense();
+            frm.ShowDialog();
         }
     }
 }
