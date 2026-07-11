@@ -68,16 +68,16 @@ namespace DVLD_DataAccessLayer
             finally { connection.Close(); }
             return UserID;
         }
-        public static bool UpdateUser(int UserID, int PersonID, string UserName,string Password, bool IsActive ) 
+        public static bool UpdateUser(int UserID, int PersonID, string UserName, bool IsActive ) 
         {
             bool IsUpdated= false;
           
             SqlConnection connection = new SqlConnection(clsDVLD_DataAccessSettings.ConnectionString);
-            string Query = "UPDATE [dbo].[Users] SET [UserName] = @UserName  ,PersonID = @PersonID  ,[Password] = @Password,[IsActive] = @IsActive where UserID =@UserID;";
+            string Query = "UPDATE [dbo].[Users] SET [UserName] = @UserName  ,PersonID = @PersonID  ,[IsActive] = @IsActive where UserID =@UserID;";
             SqlCommand command= new SqlCommand(Query, connection);
             command.Parameters.AddWithValue("@UserID", UserID);
             command.Parameters.AddWithValue("@UserName", UserName);
-            command.Parameters.AddWithValue("@Password", Password);
+           
             command.Parameters.AddWithValue("@IsActive", IsActive);
             command.Parameters.AddWithValue("@PersonID", PersonID);
 
@@ -324,6 +324,7 @@ namespace DVLD_DataAccessLayer
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@UserID", UserID);
+            command.Parameters.AddWithValue("@Password", Password);
 
             try
             {

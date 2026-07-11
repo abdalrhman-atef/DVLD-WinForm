@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DVLD_DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using DVLD_DataAccessLayer;
 
 namespace DVLD_BusinessLayer
 {
@@ -43,6 +44,19 @@ namespace DVLD_BusinessLayer
 
 
         }
+        private static string ComputeHash(string Input)
+        {
+            using (SHA256 sHA256 = SHA256.Create())
+            {
+                byte[] hashBytes = sHA256.ComputeHash(Encoding.UTF8.GetBytes(Input));
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+
+
+            }
+
+
+
+        }
 
         public static DataTable UsersList() 
         {
@@ -56,7 +70,8 @@ namespace DVLD_BusinessLayer
             }
             else
             {
-                this._UserID = clsUsersData.AddNewUser(this._PersonID, this._UserName, this._Password, this._IsActive);
+                
+                this._UserID = clsUsersData.AddNewUser(this._PersonID, this._UserName, ComputeHash( this._Password), this._IsActive);
                 return (this._UserID != -1);
 
             }
@@ -67,7 +82,7 @@ namespace DVLD_BusinessLayer
         private bool _UpdateUser() 
         {
         
-            return clsUsersData.UpdateUser(this._UserID,this._PersonID,this._UserName,this._Password,this._IsActive);
+            return clsUsersData.UpdateUser(this._UserID,this._PersonID,this._UserName, this._IsActive);
 
 
         
@@ -119,8 +134,9 @@ namespace DVLD_BusinessLayer
         }
         public static clsUsers FindByUserNameAndPassword(string UserName, string Password)
         {
+            
             int PersonID = -1; int UserID = -1; bool IsActive = false;
-            if (clsUsersData.FindUserByUserNameAndPassword(ref UserID, ref PersonID,  UserName,  Password, ref IsActive))
+            if (clsUsersData.FindUserByUserNameAndPassword(ref UserID, ref PersonID,  UserName, ComputeHash(Password), ref IsActive))
             {
                 return new clsUsers(UserID, PersonID, UserName, Password, IsActive);
 
@@ -168,15 +184,30 @@ namespace DVLD_BusinessLayer
         }
         public bool ChangePassword(string NewPassword) 
         {
-            if (clsUsersData.ChangePassword(this._UserID,NewPassword))
+            string HashedPassword=ComputeHash(NewPassword);
+            if (clsUsersData.ChangePassword(this._UserID, HashedPassword))
             {
                 
-                this._Password= NewPassword;
+                this._Password= HashedPassword;
                 return true;
             }
             return false;
         }
 
+        public bool VerifyPassword(string Password) 
+        {
+           
+
+            if (this._Password == ComputeHash(Password))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
 
     }
